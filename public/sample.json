@@ -1,0 +1,84 @@
+{
+    "profile": {
+      "title": "[Tên] - Software Engineer",
+      "image": "professional_headshot.jpg",
+      "summary": "Một đoạn văn ngắn gọn giới thiệu về bạn, kinh nghiệm và những gì bạn đam mê. Ví dụ: Kỹ sư phần mềm với [số năm] kinh nghiệm, đam mê phát triển các ứng dụng web và mobile. Có khả năng làm việc độc lập và trong nhóm, luôn tìm tòi và học hỏi những công nghệ mới."
+    },
+    "technical_skills": {
+      "programming_languages": [
+        "Python",
+        "JavaScript",
+        "Java",
+        "..."
+      ],
+      "frameworks_libraries": [
+        "React",
+        "Angular",
+        "Django",
+        "Node.js",
+        "..."
+      ],
+      "tools": [
+        "Git",
+        "Docker",
+        "IDE (Visual Studio Code, IntelliJ IDEA)",
+        "..."
+      ],
+      "others": [
+        "SQL",
+        "AWS",
+        "GCP",
+        "..."
+      ]
+    },
+    "education": [
+      {
+        "school_name": "[Tên trường]",
+        "degree": "Bằng cấp",
+        "major": "Chuyên ngành"
+      }
+    ],
+    "work_experience": [
+      {
+        "company_name": "[Tên công ty/tổ chức]",
+        "position": "Vị trí",
+        "duration": "Thời gian (năm bắt đầu - năm kết thúc)",
+        "description": "Mô tả công việc và thành tựu"
+      }
+    ],
+    "projects": [
+      {
+        "project_name": "[Tên dự án 1]",
+        "description": "Mô tả ngắn gọn về dự án",
+        "technologies": ["Công nghệ sử dụng (icon 1)", "icon 2", "..."],
+        "demo_link": "Link demo/code",
+        "achievements": "Thành tựu đạt được"
+      },
+      {
+        "project_name": "[Tên dự án 2]",
+        "description": "Mô tả ngắn gọn về dự án",
+        "technologies": ["Công nghệ sử dụng (icon 1)", "icon 2", "..."],
+        "demo_link": "Link demo/code",
+        "achievements": "Thành tựu đạt được"
+      }
+    ],
+    "awards_certificates": [
+      {
+        "name": "[Tên giải thưởng/chứng chỉ]",
+        "issued_by": "Cơ quan cấp",
+        "year": "Năm đạt được"
+      }
+    ],
+    "publications_talks": [
+      {
+        "title": "[Tên bài viết/bài nói chuyện]",
+        "link": "Link đến bài viết/video"
+      }
+    ],
+    "contact": {
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "linkedin": "LinkedIn",
+      "github": "GitHub"
+    }
+  }
