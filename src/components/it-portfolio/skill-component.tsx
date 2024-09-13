@@ -3,9 +3,10 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from 'next/image';
 
 const SkillImage = ({ src, alt }: { src: string; alt: string }) => (
-  <img src={src} alt={alt} className="w-[72px] h-[82px]" />
+  <Image src={src} alt={alt} width={72} height={82} className="w-[72px] h-[82px]" />
 );
 
 const SkillTitle = ({ title }: { title: string }) => (

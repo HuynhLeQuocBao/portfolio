@@ -3,6 +3,7 @@
 import React, { useEffect } from "react";
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Image from 'next/image';
 
 const TextSection = () => (
   <div className="flex flex-col items-center md:w-1/2 xl:w-2/3 box-border">
@@ -32,17 +33,20 @@ const TextSection = () => (
 
 const ImageSection = () => (
   <div data-aos="flip-left" className="flex flex-col items-center mt-10 md:mt-0">
-    <img
+    <Image
       src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/eopjsl8i9fb-1%3A236?alt=media&token=7b3a3aed-f77e-4bd1-9e28-b2c451e00e6b"
       alt="Not Found"
+      width={500}
+      height={500}
       className="w-full h-auto"
       loading="eager"
     />
     <div className="flex justify-center w-full mt-4">
-      <img
+      <Image
         src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/eopjsl8i9fb-1%3A242?alt=media&token=f2114610-e1ed-4aa1-ac3b-00d3c49994ea"
         alt="Not Found"
-        className="w-[205px] h-[32px]"
+        width={205}
+        height={32}
       />
     </div>
   </div>

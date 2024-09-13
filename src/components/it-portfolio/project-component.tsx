@@ -3,9 +3,10 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Image from 'next/image';
 
 const ProjectImage = ({ src, alt }: { src: string; alt: string }) => (
-  <img src={src} alt={alt} className="w-full h-[250px] object-cover" />
+  <Image src={src} alt={alt} width={500} height={250} className="w-full h-[250px] object-cover" />
 );
 
 const ProjectTitle = ({ title }: { title: string }) => (
