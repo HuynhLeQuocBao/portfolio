@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root.light {
+    --bg-color: #FFFFFF;
+    --highlight-text-color: #FD6F00;
+    --primary-text-color: #000000;
+    --secondary-text-color: #4F4F4F;
+  }
+  :root.dark {
+    --bg-color: #121212;
+    
+  }
+body {
+    margin: 2em 15em 0vw 15em;
+    background: var(--bg-color);
+}
+.highlight-text{
+    --tw-text-opacity: 1;
+    color: rgb(253 111 0 / var(--tw-text-opacity)) 
+}
+.header-text{
+    color: var(--secondary-text-color);
+    font-size: 1.2em;
+}
