@@ -1,0 +1,74 @@
+{
+  "profile": {
+    "name": "Duy-Nam Ly",
+    "image": "/uploads/marketing.jpg",
+    "bio": "This is my bio"
+  },
+  "technicalSkills": [
+    {
+      "title": "Javascript",
+      "description": "3-year experience",
+      "skill": "Programming Languages",
+      "subname": ""
+    },
+    {
+      "skill": 0,
+      "description": "3-year experience",
+      "title": "C#"
+    },
+    {
+      "skill": 0,
+      "description": "3-year experience",
+      "title": "Unity"
+    },
+    {
+      "skill": 0,
+      "description": "3-year experience",
+      "title": "React"
+    }
+  ],
+  "education": [
+    {
+      "schoolName": "HCMUS",
+      "degree": "Bachelor",
+      "major": "CS"
+    }
+  ],
+  "workExperience": [
+    {
+      "companyName": "",
+      "position": "",
+      "duration": "",
+      "description": ""
+    }
+  ],
+  "projects": [
+    {
+      "projectName": "Web",
+      "description": "Website",
+      "technologies": "Javascript, NextJs, NodeJs",
+      "demoLink": "",
+      "achievements": "",
+      "image": "/uploads/home.png"
+    }
+  ],
+  "awardsCertificates": [
+    {
+      "name": "",
+      "issuedBy": "",
+      "year": ""
+    }
+  ],
+  "publicationsTalks": [
+    {
+      "title": "",
+      "link": ""
+    }
+  ],
+  "contact": {
+    "email": "ldnam@selab.hcmus.edu.vn",
+    "phone": "0000000",
+    "linkedin": "000000",
+    "github": "000000"
+  }
+}

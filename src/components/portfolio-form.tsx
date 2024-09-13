@@ -1,22 +1,18 @@
 "use client";
 import { useForm, useFieldArray } from "react-hook-form";
-import { FC } from "react";
+import { FC, useRef } from "react";
 import { FormData } from "../interfaces";
-import  ProfileForm  from "./form/profile";
-import  TechnicalSkills  from "./form/technicalskills";
-import  Education  from "./form/education";
-import  WorkExperience  from "./form/workexperience";
-import Projects from "./form/projects";
-import Certificates from "./form/certificates";
+import * as FormDataUpload from 'form-data'
+import axios from 'axios'; // Import axios for HTTP requests
 const PortfolioForm: FC = () => {
-  const { register, control, handleSubmit } = useForm<FormData>({
+  const { register, control, handleSubmit, setValue } = useForm<FormData>({
     defaultValues: {
       profile: {
-        title: "",
+        name: "",
         image: "",
-        summary: "",
+        bio: "",
       },
-      technicalSkills: [{ skill: 0, description: "", subname: "" }],
+      technicalSkills: [{ title: "", description: "" }],
 
       education: [{ schoolName: "", degree: "", major: "" }],
       workExperience: [
@@ -25,10 +21,9 @@ const PortfolioForm: FC = () => {
       projects: [
         {
           projectName: "",
-          description: "",
           technologies: "",
           demoLink: "",
-          achievements: "",
+          image: "",
         },
       ],
       awardsCertificates: [{ name: "", issuedBy: "", year: "" }],
@@ -57,10 +52,30 @@ const PortfolioForm: FC = () => {
     control,
     name: "awardsCertificates"
   });
-  const onSubmit = (data: FormData) => {
-    console.log(data);
+  const onSubmit = async (data: FormData) => {
+    try {
+      console.log(data)
+      await axios.post('/api/submit', data);
+     // alert('Data saved successfully');
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      //alert('Failed to save data');
+    }
   };
+  const fileInput = useRef<HTMLInputElement>(null);
+  const uploadFile = async (
+    file: File, callback: (url: string)=> void
+  )=> {
+   
+    console.log(file)
+    const formData = new FormDataUpload();
+    formData.append("file", file);
 
+    const response = await axios.post("/api/upload", formData);
+
+    console.log(response);
+    callback(response.data.url)
+  }
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -83,22 +98,41 @@ const PortfolioForm: FC = () => {
                     <span className="text-gray-700">Name</span>
                     <input
                         type="text"
-                        {...register("profile.title")}
+                        {...register("profile.name")}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                 </label>
                 <label className="block">
                     <span className="text-gray-700">Image URL</span>
                     <input
+                    
                         type="file"
-                        {...register("profile.image")}
+                        onChange ={  (e) => {
+                          
+                          uploadFile(e.target.files[0], (url)=>{
+                            console.log(url)
+                            setValue("profile.image", url)
+                          })
+                        }}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                    />
+                    <input
+                    
+                        type="hidden"
+                        {...register("profile.image", {
+                          onChange: (e) => {uploadFile(e.target.files[0], (url)=>{
+                            console.log(url)
+                            setValue("profile.image", url)
+                          })},
+    
+                        })}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                 </label>
                 <label className="block">
                     <span className="text-gray-700">Bio</span>
                     <textarea
-                        {...register("profile.summary")}
+                        {...register("profile.bio")}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none h-32"
                     />
                 </label>
@@ -114,28 +148,13 @@ const PortfolioForm: FC = () => {
                         className="space-y-2 border p-4 rounded-md shadow-sm"
                     >
                         <label className="block">
-                            <span className="text-gray-700">Skill</span>
-
-                            <select {...register(`technicalSkills.${index}.skill`)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none">
-                                <option>Programming Languages</option>
-                                <option>JavaScript</option>
-                                <option>Python</option>
-                                <option>Java</option>
-                                <option>C#</option>
-                                <option>PHP</option>
-                                <option>Ruby</option>
-                                <option>Swift</option>
-                                <option>Kotlin</option>
-                                <option>Go</option>
-                                <option>Scala</option>
-                                <option>Rust</option>
-                                <option>Perl</option>
-                                <option>Objective-C</option>
-                                <option>SQL</option>
-                                <option>HTML</option>
-                                <option>CSS</option>
-                                <option>Other</option>
-                            </select>
+                            <span className="text-gray-700">Framework/Tool/Language</span>
+                            <input
+                                type="text"
+                                {...register(`technicalSkills.${index}.title`)}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                            />
+                            
                         </label>
                         <label className="block">
                             <span className="text-gray-700">Description</span>
@@ -145,21 +164,14 @@ const PortfolioForm: FC = () => {
                                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                             />
                         </label>
-                        <label className="block">
-                            <span className="text-gray-700">Subname</span>
-                            <input
-                                type="text"
-                                {...register(`technicalSkills.${index}.subname`)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                            />
-                        </label>
+                        
                     </div>
                 )
                 )}
                 <button
                     type="button"
                     onClick={() =>
-                        appendSkill({ skill: 0, description: "", subname: "" })
+                        appendSkill({ skill: 0, description: "" })
                     }
                     className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
                 >
@@ -253,13 +265,34 @@ const PortfolioForm: FC = () => {
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
+              
               <label className="block">
-                <span className="text-gray-700">Achievements</span>
-                <textarea
-                  {...register(`projects.${index}.achievements`)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                />
-              </label>
+                    <span className="text-gray-700">Picture</span>
+                    <input
+                    
+                        type="file"
+                        onChange ={  (e) => {
+                          
+                          uploadFile(e.target.files[0], (url)=>{
+                            console.log(url)
+                            setValue(`projects.${index}.image`, url)
+                          })
+                        }}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                    />
+                    <input
+                    
+                        type="hidden"
+                        {...register(`projects.${index}.image`, {
+                          onChange: (e) => {uploadFile(e.target.files[0], (url)=>{
+                            console.log(url)
+                            setValue(`projects.${index}.image`, url)
+                          })},
+    
+                        })}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                    />
+                </label>
             </div>
           ))}
           <button

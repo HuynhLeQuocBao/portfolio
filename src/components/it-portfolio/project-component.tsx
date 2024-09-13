@@ -21,7 +21,7 @@ const ProjectDescription = ({ description }: { description: string }) => (
   </p>
 );
 
-const ProjectComponent = () => {
+const ProjectComponent = ({projectName, technologies, demoLink, image}: {projectName:string, technologies:string, demoLink:string, image:string}) => {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
@@ -29,11 +29,11 @@ const ProjectComponent = () => {
   return (
     <div data-aos="flip-up" className="flex flex-col h-full p-5 rounded-lg shadow shadow-slate-500">
       <ProjectImage
-        src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/bmb1ipi3ycl-3203%3A962?alt=media&token=01fbc310-b202-4c51-84eb-a97ff0df842a"
+        src={image}
         alt="Not Found"
       />
-      <ProjectTitle title="Web Design" />
-      <ProjectDescription description="AirCalling Landing Page Design" />
+      <ProjectTitle title={technologies} />
+      <ProjectDescription description={projectName} />
     </div>
   );
 };

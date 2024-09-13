@@ -9,15 +9,14 @@ export interface PortfolioTemplate {
 }
 
 export interface Profile {
-  title: string;
+  name: string;
   image: string;
-  summary: string;
+  bio: string;
 }
 
 export interface TechnicalSkill {
   description: string;
-  skill: number;
-  subname:string;
+  title: string;
 }
 
 export interface Education {
@@ -35,10 +34,9 @@ export interface WorkExperience {
 
 export interface Project {
   projectName: string;
-  description: string;
   technologies: string;
   demoLink: string;
-  achievements: string;
+  image: string;
 }
 
 export interface AwardCertificate {

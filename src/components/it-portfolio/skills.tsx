@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SkillComponent from "./skill-component";
+import { TechnicalSkill } from "@/interfaces";
 
 const SectionTitle = ({
   title,
@@ -20,16 +21,16 @@ const SectionTitle = ({
   </div>
 );
 
-const SkillList = ({ skills }: { skills: number[] }) => (
+const SkillList = ({ skills }: { skills: TechnicalSkill[]|undefined }) => (
   <div className="grid grid-cols-1 place-items-center gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full">
-    {skills.map((item, index) => (
-      <SkillComponent key={index} />
+    {skills?.map((item, index) => (
+      <SkillComponent key={index} title={item.title} description={item.description}/>
     ))}
   </div>
 );
 
-const Skills = () => {
-  const skills = [1, 2, 3, 4];
+const Skills = ({technicalSkills} : {technicalSkills: TechnicalSkill[]|undefined}) => {
+
   const title = "Skills";
   const description =
     "Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa nibh lectus netus in. Aliquet donec morbi convallis pretium";
@@ -44,7 +45,7 @@ const Skills = () => {
       className="flex flex-col justify-start items-start p-4 md:p-10 xl:p-20 w-full h-auto bg-gray-100"
     >
       <SectionTitle title={title} description={description} />
-      <SkillList skills={skills} />
+      <SkillList skills={technicalSkills} />
     </div>
   );
 };
