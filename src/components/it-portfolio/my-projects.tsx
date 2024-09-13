@@ -1,24 +1,52 @@
+"use client";
+
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import ProjectComponent from "./project-component";
 
-const MyProjects = () => {
-    return (
-        <div className=" flex flex-col justify-start items-start mt-20 pb-[174px] box-border margin">
-            <div className=" flex flex-col items-center w-[100%] h-[100%] box-border">
-                <p className="  border-[#1e1e1eff]  text-[65px]  font-poppins  font-[600]  tracking-[1.95px]">
-                    My Projects
-                </p>
-                <p className=" flex flex-col justify-center  border-[#000000ff]  text-[21px]  mt-5  font-poppins  font-[400] text-center  tracking-[0.63px]">
-                    Lorem ipsum dolor sit amet consectetur. Mollis erat duis aliquam
-                    mauris est risus lectus. Phasellus consequat urna tellus
-                </p>
-                <div className=" grid grid-cols-3 gap-4 mt-10 w-[100%] box-border">
-                    {
-                        [1, 2, 3, 4].map((item, index) => (<ProjectComponent key={index} />))
-                    }
+const SectionTitle = ({
+  title,
+  description,
+}: {
+  title: string;
+  description: string;
+}) => (
+  <div className="flex flex-col items-center w-full px-8 pb-10">
+    <p data-aos="fade-down" className="text-6xl font-semibold font-poppins text-center">{title}</p>
+    <p data-aos="fade-up" className="text-lg font-normal font-poppins text-center tracking-wide mt-4">
+      {description}
+    </p>
+  </div>
+);
 
-                </div>
-            </div>
-        </div>
-    )
-}
-export default MyProjects;
+const ProjectList = ({ projects }: { projects: number[] }) => (
+  <div className="grid grid-cols-1 place-items-center gap-10 lg:grid-cols-2 xl:grid-cols-3 w-full">
+    {projects.map((item, index) => (
+      <ProjectComponent key={index} />
+    ))}
+  </div>
+);
+
+const Projects = () => {
+  const projects = [1, 2, 3];
+  const title = "My Projects";
+  const description =
+    "Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa nibh lectus netus in. Aliquet donec morbi convallis pretium";
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+  return (
+    <div
+      id="projects"
+      className="flex flex-col justify-start items-start p-4 md:p-10 xl:p-20 w-full h-auto bg-white"
+    >
+      <SectionTitle title={title} description={description} />
+      <ProjectList projects={projects} />
+    </div>
+  );
+};
+
+export default Projects;

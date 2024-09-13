@@ -1,32 +1,30 @@
+import React from "react";
+
+const HeaderItem = ({ text, link }: { text: string; link: string }) => (
+  <a
+    href={"#" + link}
+    className="block py-5 header-text text-xl font-poppins hover:text-teal-700 active:text-teal-700"
+  >
+    {text}
+  </a>
+);
+
 const Header = () => {
-    return(
-        <div className=" flex flex-row justify-start items-start gap-3 w-[1365px] h-[52px] box-border margin">
-        <div className=" flex flex-row justify-start items-start gap-2.5 h-[100%] px-3.5 py-2.5 box-border  ">
-          <p className="  header-text text-[21px]  leading-[21px]  font-poppins  font-[400]  tracking-[0.63px]">
-            Home
-          </p>
-        </div>
-        <div className=" flex flex-row justify-start items-start gap-2.5 h-[100%] px-3.5 py-2.5 box-border  ">
-          <p className="  header-text  text-[21px]  leading-[21px]  font-poppins  font-[400]  tracking-[0.63px]">
-            Skills
-          </p>
-        </div>
-        <div className=" flex flex-row justify-start items-start gap-2.5 h-[100%] px-3.5 py-2.5 box-border  ">
-          <p className="  header-text   text-[21px]  leading-[21px]  font-poppins  font-[400]  tracking-[0.63px]">
-            Education
-          </p>
-        </div>
-        <div className=" flex flex-row justify-start items-start gap-2.5 h-[100%] px-3.5 py-2.5 box-border  ">
-          <p className="  header-text  text-[21px]  leading-[21px]  font-poppins  font-[400]  tracking-[0.63px]">
-            Experience
-          </p>
-        </div>
-        <div className=" flex flex-row justify-start items-start gap-2.5 h-[100%] px-3.5 py-2.5 box-border  ">
-          <p className="  header-text text-[21px]  leading-[21px]  font-poppins  font-[400]  tracking-[0.63px]">
-            Projects
-          </p>
-        </div>
-      </div>
-    )
-}
+  const headerItems = [
+    { text: "Home", link: "home" },
+    { text: "Skills", link: "skills" },
+    { text: "Education", link: "education" },
+    { text: "Experience", link: "experience" },
+    { text: "Projects", link: "projects" },
+  ];
+
+  return (
+    <div className="flex items-center justify-center w-full gap-x-10 fixed top-0 left-0 bg-white opacity-80 z-50 shadow-xl overflow-x-auto px-10">
+      {headerItems.map((item, index) => (
+        <HeaderItem key={index} text={item.text} link={item.link} />
+      ))}
+    </div>
+  );
+};
+
 export default Header;

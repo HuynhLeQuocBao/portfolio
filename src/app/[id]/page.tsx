@@ -7,14 +7,14 @@ import MyProjects from "@/components/it-portfolio/my-projects";
 import Footer from "@/components/it-portfolio/footer";
 
 const PortfolioPage = () => {
-    return (
-        <div  className="w-full">
-            <Header/>
-            <AboutMe/>
-            <Skills/>
-            <MyProjects/>
-            <Footer/>
-        </div>
-    );
-}
+  return (
+    <div className="w-full">
+      <Header />
+      <AboutMe />
+      <Skills />
+      <MyProjects />
+      <Footer />
+    </div>
+  );
+};
 export default PortfolioPage;
