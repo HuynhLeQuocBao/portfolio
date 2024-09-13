@@ -30,10 +30,10 @@ const TextSection = ({name, bio}:{name:string|undefined, bio:string|undefined}) 
   </div>
 );
 
-const ImageSection = () => (
+const ImageSection = ({image}:{image:string|undefined}) => (
   <div data-aos="flip-left" className="flex flex-col items-center mt-10 md:mt-0">
     <Image
-      src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/eopjsl8i9fb-1%3A236?alt=media&token=7b3a3aed-f77e-4bd1-9e28-b2c451e00e6b"
+      src={image?image:""}
       alt="Not Found"
       width={500}
       height={500}
@@ -61,7 +61,7 @@ const AboutMe = ({name, bio, image}:{name:string|undefined, bio:string|undefined
       <div className="flex flex-col w-full pb-px box-border">
         <div className="flex flex-col md:flex-row justify-between items-center w-full h-auto pb-px box-border">
           <TextSection name={name} bio={bio}/>
-          <ImageSection />
+          <ImageSection image={image}/>
         </div>
       </div>
     </div>
