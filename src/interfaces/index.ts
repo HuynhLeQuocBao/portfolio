@@ -14,11 +14,10 @@ export interface Profile {
   summary: string;
 }
 
-export interface TechnicalSkills {
-  programmingLanguages: string[];
-  frameworksLibraries: string[];
-  tools: string[];
-  others: string[];
+export interface TechnicalSkill {
+  description: string;
+  skill: number;
+  subname:string;
 }
 
 export interface Education {
@@ -37,7 +36,7 @@ export interface WorkExperience {
 export interface Project {
   projectName: string;
   description: string;
-  technologies: string[];
+  technologies: string;
   demoLink: string;
   achievements: string;
 }
@@ -62,7 +61,7 @@ export interface Contact {
 
 export interface FormData {
   profile: Profile;
-  technicalSkills: TechnicalSkills;
+  technicalSkills: TechnicalSkill[];
   education: Education[];
   workExperience: WorkExperience[];
   projects: Project[];

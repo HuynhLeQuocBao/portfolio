@@ -70,7 +70,7 @@ const PorfolioTemplate: FC = () => {
       </div>
 
       <Modal isOpen={isModalOpen} onClose={closeModal}>
-        <h1 className="text-xl font-bold mb-4">Update Profile</h1>
+        <h1 className="text-xl font-bold mb-4">Update Porfolio</h1>
         <ProfileForm />
       </Modal>
     </>

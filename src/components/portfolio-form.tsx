@@ -2,8 +2,13 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { FC } from "react";
 import { FormData } from "../interfaces";
-
-const ProfileForm: FC = () => {
+import  ProfileForm  from "./form/profile";
+import  TechnicalSkills  from "./form/technicalskills";
+import  Education  from "./form/education";
+import  WorkExperience  from "./form/workexperience";
+import Projects from "./form/projects";
+import Certificates from "./form/certificates";
+const PortfolioForm: FC = () => {
   const { register, control, handleSubmit } = useForm<FormData>({
     defaultValues: {
       profile: {
@@ -11,12 +16,8 @@ const ProfileForm: FC = () => {
         image: "",
         summary: "",
       },
-      technicalSkills: {
-        programmingLanguages: [""],
-        frameworksLibraries: [""],
-        tools: [""],
-        others: [""],
-      },
+      technicalSkills: [{ skill: 0, description: "", subname: "" }],
+
       education: [{ schoolName: "", degree: "", major: "" }],
       workExperience: [
         { companyName: "", position: "", duration: "", description: "" },
@@ -25,7 +26,7 @@ const ProfileForm: FC = () => {
         {
           projectName: "",
           description: "",
-          technologies: [""],
+          technologies: "",
           demoLink: "",
           achievements: "",
         },
@@ -40,7 +41,22 @@ const ProfileForm: FC = () => {
     control,
     name: "education",
   });
-
+  const { fields: technicalSkillsFields, append: appendSkill } = useFieldArray({
+    control,
+    name: "technicalSkills"
+  });
+  const { fields: workExperienceFields, append: appendWorkExperience } = useFieldArray({
+    control,
+    name: "workExperience"
+  });
+  const { fields: projectFields, append: appendProject } = useFieldArray({
+    control,
+    name: "projects"
+  });
+  const { fields: certificateFields, append: appendCertificate } = useFieldArray({
+    control,
+    name: "awardsCertificates"
+  });
   const onSubmit = (data: FormData) => {
     console.log(data);
   };
@@ -50,131 +66,213 @@ const ProfileForm: FC = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="max-w-3xl mx-auto p-4 space-y-4 w-full"
     >
-      <h2 className="text-2xl font-bold">Profile</h2>
-      <div className="space-y-2">
-        <label className="block">
-          <span className="text-gray-700">Title</span>
-          <input
-            type="text"
-            {...register("profile.title")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Image URL</span>
-          <input
-            type="text"
-            {...register("profile.image")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Summary</span>
-          <textarea
-            {...register("profile.summary")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none h-32"
-          />
-        </label>
-      </div>
+      {/* <ProfileForm register = {register} />
 
-      {/* Technical Skills */}
-      <h2 className="text-2xl font-bold">Technical Skills</h2>
-      <div className="space-y-2">
-        <label className="block">
-          <span className="text-gray-700">Programming Languages</span>
-          <input
-            type="text"
-            {...register("technicalSkills.programmingLanguages.0")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Frameworks/Libraries</span>
-          <input
-            type="text"
-            {...register("technicalSkills.frameworksLibraries.0")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Tools</span>
-          <input
-            type="text"
-            {...register("technicalSkills.tools.0")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-          />
-        </label>
-        <label className="block">
-          <span className="text-gray-700">Others</span>
-          <input
-            type="text"
-            {...register("technicalSkills.others.0")}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-          />
-        </label>
-      </div>
+      <TechnicalSkills register={register} appendSkill={appendSkill} technicalSkillsField={technicalSkillsFields} />
 
-      {/* Education */}
-      <h2 className="text-2xl font-bold">Education</h2>
-      <div className="space-y-4">
-        {educationFields.map((item, index) => (
-          <div
-            key={item.id}
-            className="space-y-2 border p-4 rounded-md shadow-sm"
+      <Education register={register} appendEducation={appendEducation} educationFields={educationFields} />
+
+      <WorkExperience register={register} appendWorkExperience={appendWorkExperience} workExperienceFields={workExperienceFields}/>
+
+      <Projects register={register} appendProject={appendProject} projectFields={projectFields} />
+      <Certificates register={register} appendCertificate={appendCertificate} certificateFields={certificateFields} /> */}
+       <div>
+            <h2 className="text-2xl font-bold">Profile</h2>
+            <div className="space-y-2">
+                <label className="block">
+                    <span className="text-gray-700">Name</span>
+                    <input
+                        type="text"
+                        {...register("profile.title")}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                    />
+                </label>
+                <label className="block">
+                    <span className="text-gray-700">Image URL</span>
+                    <input
+                        type="file"
+                        {...register("profile.image")}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                    />
+                </label>
+                <label className="block">
+                    <span className="text-gray-700">Bio</span>
+                    <textarea
+                        {...register("profile.summary")}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none h-32"
+                    />
+                </label>
+            </div>
+        </div>
+        <div>
+            {/* Technical Skills */}
+            <h2 className="text-2xl font-bold">Technical Skills</h2>
+            <div className="space-y-2">
+                {technicalSkillsFields.map((item, index) => (
+                    <div
+                        key={item.id}
+                        className="space-y-2 border p-4 rounded-md shadow-sm"
+                    >
+                        <label className="block">
+                            <span className="text-gray-700">Skill</span>
+
+                            <select {...register(`technicalSkills.${index}.skill`)} className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none">
+                                <option>Programming Languages</option>
+                                <option>JavaScript</option>
+                                <option>Python</option>
+                                <option>Java</option>
+                                <option>C#</option>
+                                <option>PHP</option>
+                                <option>Ruby</option>
+                                <option>Swift</option>
+                                <option>Kotlin</option>
+                                <option>Go</option>
+                                <option>Scala</option>
+                                <option>Rust</option>
+                                <option>Perl</option>
+                                <option>Objective-C</option>
+                                <option>SQL</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>Other</option>
+                            </select>
+                        </label>
+                        <label className="block">
+                            <span className="text-gray-700">Description</span>
+                            <input
+                                type="text"
+                                {...register(`technicalSkills.${index}.description`)}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                            />
+                        </label>
+                        <label className="block">
+                            <span className="text-gray-700">Subname</span>
+                            <input
+                                type="text"
+                                {...register(`technicalSkills.${index}.subname`)}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                            />
+                        </label>
+                    </div>
+                )
+                )}
+                <button
+                    type="button"
+                    onClick={() =>
+                        appendSkill({ skill: 0, description: "", subname: "" })
+                    }
+                    className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+                >
+                    Add Skill
+                </button>
+            </div>
+        </div>
+        <div>
+            {/* Education */}
+            <h2 className="text-2xl font-bold">Education</h2>
+            <div className="space-y-4 mt-10 ">
+                {educationFields.map((item, index) => (
+                    <div
+                        key={item.id}
+                        className="space-y-2 border p-4 rounded-md shadow-sm"
+                    >
+                        <label className="block">
+                            <span className="text-gray-700">School Name</span>
+                            <input
+                                type="text"
+                                {...register(`education.${index}.schoolName`)}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                            />
+                        </label>
+                        <label className="block">
+                            <span className="text-gray-700">Degree</span>
+                            <input
+                                type="text"
+                                {...register(`education.${index}.degree`)}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                            />
+                        </label>
+                        <label className="block">
+                            <span className="text-gray-700">Major</span>
+                            <input
+                                type="text"
+                                {...register(`education.${index}.major`)}
+                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                            />
+                        </label>
+                    </div>
+                ))}
+                <button
+                    type="button"
+                    onClick={() =>
+                        appendEducation({ schoolName: "", degree: "", major: "" })
+                    }
+                    className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+                >
+                    Add Education
+                </button>
+            </div>
+        </div>
+        <div>
+        {/* Projects */}
+        <h2 className="text-2xl font-bold">Projects</h2>
+        <div className="space-y-4 mt-10">
+          {projectFields.map((item, index) => (
+            <div
+              key={item.id}
+              className="space-y-2 border p-4 rounded-md shadow-sm"
+            >
+              <label className="block">
+                <span className="text-gray-700">Project Name</span>
+                <input
+                  type="text"
+                  {...register(`projects.${index}.projectName`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Description</span>
+                <textarea
+                  {...register(`projects.${index}.description`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Technologies</span>
+                <input
+                  type="text"
+                  {...register(`projects.${index}.technologies`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Demo Link</span>
+                <input
+                  type="text"
+                  {...register(`projects.${index}.demoLink`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Achievements</span>
+                <textarea
+                  {...register(`projects.${index}.achievements`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() =>
+              appendProject({ projectName: "", description: "", technologies: "", demoLink: "", achievements: "" })
+            }
+            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
           >
-            <label className="block">
-              <span className="text-gray-700">School Name</span>
-              <input
-                type="text"
-                {...register(`education.${index}.schoolName`)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Degree</span>
-              <input
-                type="text"
-                {...register(`education.${index}.degree`)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-              />
-            </label>
-            <label className="block">
-              <span className="text-gray-700">Major</span>
-              <input
-                type="text"
-                {...register(`education.${index}.major`)}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-              />
-            </label>
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={() =>
-            appendEducation({ schoolName: "", degree: "", major: "" })
-          }
-          className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
-        >
-          Add Education
-        </button>
+            Add Project
+          </button>
+        </div>
       </div>
-
-      {/* Work Experience */}
-      <h2 className="text-2xl font-bold">Work Experience</h2>
-      {/* Similar structure to Education */}
-
-      {/* Projects */}
-      <h2 className="text-2xl font-bold">Projects</h2>
-      {/* Similar structure to Education */}
-
-      {/* Awards & Certificates */}
-      <h2 className="text-2xl font-bold">Awards & Certificates</h2>
-      {/* Similar structure to Education */}
-
-      {/* Publications & Talks */}
-      <h2 className="text-2xl font-bold">Publications & Talks</h2>
-      {/* Similar structure to Education */}
-
       {/* Contact */}
       <h2 className="text-2xl font-bold">Contact</h2>
       <div className="space-y-2">
@@ -222,4 +320,4 @@ const ProfileForm: FC = () => {
   );
 };
 
-export default ProfileForm;
+export default PortfolioForm;
