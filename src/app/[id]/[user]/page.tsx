@@ -8,16 +8,16 @@ import Footer from "@/components/it-portfolio/footer";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import axios from "axios";
 import "../../../styles/it-portfolio.css";
-import { FormData } from "@/interfaces";
+import { MyFormData } from "@/interfaces";
 
 const PortfolioPage = () => {
   const params = useParams()
   const router = useRouter()
-  const [userInfo, setUserInfo] = useState<FormData>()
+  const [userInfo, setUserInfo] = useState<MyFormData>()
   useEffect(()=>{
     getData(params.user)
   },[])
-  const getData = async(userInfoId: string)=>{
+  const getData = async(userInfoId: string| string[])=>{
     try {
       console.log("/"+userInfoId+".json")
       const res =  await axios.get("/"+userInfoId+".json")

@@ -57,7 +57,7 @@ export interface Contact {
   github: string;
 }
 
-export interface FormData {
+export interface MyFormData {
   profile: Profile;
   technicalSkills: TechnicalSkill[];
   education: Education[];

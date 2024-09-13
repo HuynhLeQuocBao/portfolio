@@ -64,7 +64,7 @@ const TechnicalSkills: React.FC<TechnicalSkillsProps>= ({ register, appendSkill,
                 <button
                     type="button"
                     onClick={() =>
-                        appendSkill({ skill: 0, description: "", subname: "" })
+                        appendSkill({ title: "", description: "" })
                     }
                     className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
                 >

@@ -60,7 +60,7 @@ const Projects: React.FC<ProjectsProps> = ({ register, appendProject, projectFie
           <button
             type="button"
             onClick={() =>
-              appendProject({ projectName: "", description: "", technologies: "", demoLink: "", achievements: "" })
+              appendProject({ projectName: "", technologies: "", demoLink: "", image: "" })
             }
             className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
           >

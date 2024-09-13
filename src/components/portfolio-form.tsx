@@ -1,11 +1,11 @@
 "use client";
 import { useForm, useFieldArray } from "react-hook-form";
 import { FC, useRef } from "react";
-import { FormData } from "../interfaces";
+import { MyFormData } from "../interfaces";
 import * as FormDataUpload from 'form-data'
 import axios from 'axios'; // Import axios for HTTP requests
 const PortfolioForm: FC = () => {
-  const { register, control, handleSubmit, setValue } = useForm<FormData>({
+  const { register, control, handleSubmit, setValue } = useForm<MyFormData>({
     defaultValues: {
       profile: {
         name: "",
@@ -52,7 +52,7 @@ const PortfolioForm: FC = () => {
     control,
     name: "awardsCertificates"
   });
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: MyFormData) => {
     try {
       console.log(data)
       await axios.post('/api/submit', data);
@@ -64,11 +64,12 @@ const PortfolioForm: FC = () => {
   };
   const fileInput = useRef<HTMLInputElement>(null);
   const uploadFile = async (
-    file: File, callback: (url: string)=> void
+    file: File|null, callback: (url: string)=> void
   )=> {
-   
+    if  (file === null)
+      return;
     console.log(file)
-    const formData = new FormDataUpload();
+    const formData = new FormData();
     formData.append("file", file);
 
     const response = await axios.post("/api/upload", formData);
@@ -108,24 +109,20 @@ const PortfolioForm: FC = () => {
                     
                         type="file"
                         onChange ={  (e) => {
+                          if (e !== null && e.target !== null &&e.target.files !== null && e.target.files?.length > 0){
+                            uploadFile(e.target.files[0], (url)=>{
+                              console.log(url)
+                              setValue("profile.image", url)
+                            })
+                          }
                           
-                          uploadFile(e.target.files[0], (url)=>{
-                            console.log(url)
-                            setValue("profile.image", url)
-                          })
                         }}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                     <input
                     
                         type="hidden"
-                        {...register("profile.image", {
-                          onChange: (e) => {uploadFile(e.target.files[0], (url)=>{
-                            console.log(url)
-                            setValue("profile.image", url)
-                          })},
-    
-                        })}
+                        {...register("profile.image")}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                 </label>
@@ -171,7 +168,7 @@ const PortfolioForm: FC = () => {
                 <button
                     type="button"
                     onClick={() =>
-                        appendSkill({ skill: 0, description: "" })
+                        appendSkill({ title: "", description: "" })
                     }
                     className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
                 >
@@ -242,13 +239,7 @@ const PortfolioForm: FC = () => {
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
-              <label className="block">
-                <span className="text-gray-700">Description</span>
-                <textarea
-                  {...register(`projects.${index}.description`)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                />
-              </label>
+             
               <label className="block">
                 <span className="text-gray-700">Technologies</span>
                 <input
@@ -272,24 +263,20 @@ const PortfolioForm: FC = () => {
                     
                         type="file"
                         onChange ={  (e) => {
+                          if (e !== null && e.target !== null &&e.target.files !== null && e.target.files?.length > 0){
+                            uploadFile(e.target.files[0], (url)=>{
+                              console.log(url)
+                              setValue(`projects.${index}.image`, url)
+                            })
+                          }
                           
-                          uploadFile(e.target.files[0], (url)=>{
-                            console.log(url)
-                            setValue(`projects.${index}.image`, url)
-                          })
                         }}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                     <input
                     
                         type="hidden"
-                        {...register(`projects.${index}.image`, {
-                          onChange: (e) => {uploadFile(e.target.files[0], (url)=>{
-                            console.log(url)
-                            setValue(`projects.${index}.image`, url)
-                          })},
-    
-                        })}
+                        {...register(`projects.${index}.image`)}
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                 </label>
@@ -298,7 +285,7 @@ const PortfolioForm: FC = () => {
           <button
             type="button"
             onClick={() =>
-              appendProject({ projectName: "", description: "", technologies: "", demoLink: "", achievements: "" })
+              appendProject({ projectName: "", technologies: "", demoLink: "", image: "" })
             }
             className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
           >
