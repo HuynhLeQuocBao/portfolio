@@ -11,7 +11,7 @@ const TextSection = () => (
         <p data-aos="fade-down" className="text-2xl font-semibold tracking-wider font-poppins">
           Hi I am
         </p>
-        <p data-aos="fade-down" className="mt-2 highlight-text text-[32px] leading-8 font-semibold tracking-wide font-poppins">
+        <p data-aos="fade-down" className="my-4 highlight-text text-[32px] leading-8 font-semibold tracking-wide font-poppins">
           [Name]
         </p>
         <p data-aos="fade-up" className="text-6xl xl:text-[100px] xl:leading-[120%] font-bold tracking-wider font-poppins">

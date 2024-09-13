@@ -19,7 +19,7 @@ const Header = () => {
   ];
 
   return (
-    <div className="flex items-center justify-center w-full gap-x-10 fixed top-0 left-0 bg-white opacity-80 z-50 shadow-xl overflow-x-auto px-10">
+    <div className="flex items-center xl:justify-center w-full gap-x-10 fixed top-0 left-0 bg-white opacity-90 z-50 shadow-xl overflow-x-auto px-10">
       {headerItems.map((item, index) => (
         <HeaderItem key={index} text={item.text} link={item.link} />
       ))}

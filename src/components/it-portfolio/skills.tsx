@@ -12,8 +12,8 @@ const SectionTitle = ({
   title: string;
   description: string;
 }) => (
-  <div className="flex flex-col items-center w-full px-8 pb-10">
-    <p data-aos="fade-down" className="text-6xl font-semibold font-poppins text-center">{title}</p>
+  <div className="flex flex-col items-center w-full pb-10">
+    <p data-aos="fade-down" className="text-5xl text-6xl font-semibold font-poppins text-center">{title}</p>
     <p data-aos="fade-up" className="text-lg font-normal font-poppins text-center tracking-wide mt-4">
       {description}
     </p>
