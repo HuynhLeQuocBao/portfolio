@@ -1,6 +1,6 @@
 const AboutMe = () => {
     return (
-        <div className=" flex flex-col justify-start items-start w-[1400px] h-[686.48px] pb-[0.48px] box-border">
+        <div className=" flex flex-col justify-start items-start w-[1400px] h-[686.48px] pb-[0.48px] box-border margin">
             <div className=" flex flex-col justify-start items-start w-[100%] pb-[0.24px] box-border">
                 <div className=" flex flex-row justify-between items-center w-[100%] h-[100%] pb-[0.24px] box-border">
                     <div className=" flex flex-col items-center h-[undefinedundefined] box-border max-w-[58em]">

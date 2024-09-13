@@ -13,7 +13,7 @@
     
   }
 body {
-    margin: 2em 15em 0vw 15em;
+   
     background: var(--bg-color);
 }
 .highlight-text{
@@ -23,4 +23,7 @@ body {
 .header-text{
     color: var(--secondary-text-color);
     font-size: 1.2em;
+}
+.margin{
+  margin: 2em 15em 0vw 15em;
 }

@@ -2,7 +2,7 @@ import ProjectComponent from "./project-component";
 
 const MyProjects = () => {
     return (
-        <div className=" flex flex-col justify-start items-start mt-20 pb-[174px] box-border">
+        <div className=" flex flex-col justify-start items-start mt-20 pb-[174px] box-border margin">
             <div className=" flex flex-col items-center w-[100%] h-[100%] box-border">
                 <p className="  border-[#1e1e1eff]  text-[65px]  font-poppins  font-[600]  tracking-[1.95px]">
                     My Projects
