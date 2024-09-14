@@ -58,6 +58,7 @@ export interface Contact {
 }
 
 export interface MyFormData {
+  portfolioId: string;
   profile: Profile;
   technicalSkills: TechnicalSkill[];
   education: Education[];

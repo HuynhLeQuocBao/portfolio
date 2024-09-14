@@ -32,23 +32,23 @@ const PortfolioForm: FC = () => {
     },
   });
 
-  const { fields: educationFields, append: appendEducation } = useFieldArray({
+  const { fields: educationFields, append: appendEducation, remove: removeEducation } = useFieldArray({
     control,
     name: "education",
   });
-  const { fields: technicalSkillsFields, append: appendSkill } = useFieldArray({
+  const { fields: technicalSkillsFields, append: appendSkill, remove: removeSkill } = useFieldArray({
     control,
     name: "technicalSkills"
   });
-  const { fields: workExperienceFields, append: appendWorkExperience } = useFieldArray({
+  const { fields: workExperienceFields, append: appendWorkExperience, remove: removeWorkExperience } = useFieldArray({
     control,
     name: "workExperience"
   });
-  const { fields: projectFields, append: appendProject } = useFieldArray({
+  const { fields: projectFields, append: appendProject, remove: removeProject } = useFieldArray({
     control,
     name: "projects"
   });
-  const { fields: certificateFields, append: appendCertificate } = useFieldArray({
+  const { fields: certificateFields, append: appendCertificate,  remove: removeCertificate } = useFieldArray({
     control,
     name: "awardsCertificates"
   });
@@ -93,6 +93,15 @@ const PortfolioForm: FC = () => {
       <Projects register={register} appendProject={appendProject} projectFields={projectFields} />
       <Certificates register={register} appendCertificate={appendCertificate} certificateFields={certificateFields} /> */}
        <div>
+                <label className="block">
+                    <span className="text-gray-700">Portfolio ID</span>
+                    <input
+                        type="text"
+                        placeholder="Example: ldnam, hlqbao, mhphuc, dkhuyen,..."
+                        {...register("portfolioId")}
+                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                    />
+                </label>
             <h2 className="text-2xl font-bold">Profile</h2>
             <div className="space-y-2">
                 <label className="block">
@@ -133,6 +142,7 @@ const PortfolioForm: FC = () => {
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none h-32"
                     />
                 </label>
+                
             </div>
         </div>
         <div>
@@ -161,7 +171,14 @@ const PortfolioForm: FC = () => {
                                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                             />
                         </label>
-                        
+                         {/* Remove button */}
+                        <button
+                          type="button"
+                          onClick={() => removeSkill(index)} // Call removeSkill to remove the item at index
+                          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        >
+                          Remove
+                        </button>
                     </div>
                 )
                 )}
@@ -176,6 +193,60 @@ const PortfolioForm: FC = () => {
                 </button>
             </div>
         </div>
+        <div>
+        {/* Certificates */}
+        <h2 className="text-2xl font-bold">Certificates</h2>
+        <div className="space-y-4 mt-10">
+          {certificateFields.map((item, index) => (
+            <div
+              key={item.id}
+              className="space-y-2 border p-4 rounded-md shadow-sm"
+            >
+              <label className="block">
+                <span className="text-gray-700">Certificate Name</span>
+                <input
+                  type="text"
+                  {...register(`awardsCertificates.${index}.name`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Issued By</span>
+                <input
+                  type="text"
+                  {...register(`awardsCertificates.${index}.issuedBy`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Year</span>
+                <input
+                  type="text"
+                  {...register(`awardsCertificates.${index}.year`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              {/* Remove button */}
+              <button
+                          type="button"
+                          onClick={() => removeCertificate(index)} // Call removeSkill to remove the item at index
+                          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        >
+                          Remove
+                        </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() =>
+              appendCertificate({ name: "", issuedBy: "", year: "" })
+            }
+            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+          >
+            Add Certificate
+          </button>
+        </div>
+      </div>
         <div>
             {/* Education */}
             <h2 className="text-2xl font-bold">Education</h2>
@@ -209,6 +280,14 @@ const PortfolioForm: FC = () => {
                                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                             />
                         </label>
+                         {/* Remove button */}
+                         <button
+                          type="button"
+                          onClick={() => removeEducation(index)} // Call removeSkill to remove the item at index
+                          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                        >
+                          Remove
+                        </button>
                     </div>
                 ))}
                 <button
@@ -223,6 +302,67 @@ const PortfolioForm: FC = () => {
             </div>
         </div>
         <div>
+        <div>
+        {/* Work Experience */}
+        <h2 className="text-2xl font-bold">Work Experience</h2>
+        <div className="space-y-4 mt-10">
+          {workExperienceFields.map((item, index) => (
+            <div
+              key={item.id}
+              className="space-y-2 border p-4 rounded-md shadow-sm"
+            >
+              <label className="block">
+                <span className="text-gray-700">Company Name</span>
+                <input
+                  type="text"
+                  {...register(`workExperience.${index}.companyName`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Position</span>
+                <input
+                  type="text"
+                  {...register(`workExperience.${index}.position`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Duration</span>
+                <input
+                  type="text"
+                  {...register(`workExperience.${index}.duration`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Description</span>
+                <textarea
+                  {...register(`workExperience.${index}.description`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              {/* Remove button */}
+              <button
+                    type="button"
+                    onClick={() => removeProject(index)} // Call removeSkill to remove the item at index
+                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
+            </div>
+          ))}
+          <button
+            type="button"
+            onClick={() =>
+              appendWorkExperience({ companyName: "", position: "", duration: "", description: "" })
+            }
+            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+          >
+            Add Work Experience
+          </button>
+        </div>
+      </div>
         {/* Projects */}
         <h2 className="text-2xl font-bold">Projects</h2>
         <div className="space-y-4 mt-10">
@@ -280,6 +420,14 @@ const PortfolioForm: FC = () => {
                         className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                     />
                 </label>
+                {/* Remove button */}
+                <button
+                    type="button"
+                    onClick={() => removeProject(index)} // Call removeSkill to remove the item at index
+                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                  >
+                    Remove
+                  </button>
             </div>
           ))}
           <button

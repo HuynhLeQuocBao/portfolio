@@ -8,7 +8,8 @@ type Data = {
 };
 
 const savePortfolioToFile = (data: any) => {
-  const filePath = path.join(process.cwd(), 'public', 'portfolio.json');
+  const filename = data.portfolioId;
+  const filePath = path.join(process.cwd(), 'public', filename+'.json');
   fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
 };
 
@@ -19,7 +20,7 @@ export async function POST(req: NextRequest){
     const data = await req.json()
     console.log(data)
     savePortfolioToFile(data);
-    return NextResponse.json({ message: 'Data saved successfully' });
+    return NextResponse.json({ message: 'Data saved successfully', portfolioId: data.portfolioId });
   } catch (error) {
     console.error('Error saving data:', error);
     return  NextResponse.json({ message: 'Failed to save data' });
