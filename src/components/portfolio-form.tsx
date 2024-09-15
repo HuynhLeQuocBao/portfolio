@@ -76,22 +76,6 @@ const PortfolioForm: FC = () => {
     name: "awardsCertificates",
   });
 
-  const [userInfo, setUserInfo] = useState<MyFormData>()
-  useEffect(()=>{
-    getData(params.user)
-  },[])
-  const getData = async(userInfoId: string| string[])=>{
-    try {
-
-      const res =  await axios.get(API_URL+"/api/get-user?user="+userInfoId)
-      setUserInfo(res.data)
-      console.log(res)
-    } catch (error) {
-      console.log(error)
-      //router.replace("/software-engineer")
-    }
-  }
-
   const router = useRouter();
 
   const handleRoute = (portfolioId: string) => {
