@@ -131,12 +131,12 @@ const ImageSection = ({
     data-aos="flip-left"
     className="flex flex-col items-center mt-10 md:mt-0"
   >
-    <Image
+    <img
       src={image ? image : ""}
       alt="Not Found"
       width={500}
       height={500}
-      className="w-4/5 h-auto rounded-xl"
+      className="h-auto rounded-xl"
       loading="eager"
     />
     <div className="flex justify-center gap-x-5 w-full mt-4">
