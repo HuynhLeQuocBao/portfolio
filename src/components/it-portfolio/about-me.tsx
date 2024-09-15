@@ -129,7 +129,7 @@ const ImageSection = ({
 }) => (
   <div
     data-aos="flip-left"
-    className="flex flex-col items-center mt-10 md:mt-0"
+    className="flex flex-col items-center mt-10 md:mt-0 md:ml-10"
   >
     <img
       src={image ? image : ""}
@@ -161,7 +161,7 @@ const AboutMe = ({
   }, []);
 
   return (
-    <div id="home" className="px-4 py-10 md:p-10 xl:p-20 w-full h-auto">
+    <div id="home" className="mt-10 xl:mt-20 px-4 py-10 md:p-10 xl:p-20 w-full h-auto">
       <div className="flex flex-col w-full pb-px box-border">
         <div className="flex flex-col md:flex-row justify-between items-center w-full h-auto pb-px box-border">
           <TextSection name={name} bio={bio} />

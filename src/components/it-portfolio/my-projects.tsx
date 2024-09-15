@@ -39,7 +39,7 @@ const Projects = ({projects}:{projects: Project[]|undefined}) => {
   return (
     <div
       id="projects"
-      className="flex flex-col justify-start items-start px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-orange-50"
+      className="flex flex-col justify-start items-start px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-white"
     >
       <SectionTitle title={title} description={""} />
       <ProjectList projects={projects} />
