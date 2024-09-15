@@ -5,7 +5,7 @@ import { MyFormData } from "../interfaces";
 import * as FormDataUpload from 'form-data'
 import axios from 'axios'; // Import axios for HTTP requests
 import { useRouter } from "next/navigation";
-const API_URL = "http://68.183.186.10:3005";
+const API_URL = "https://ldnam-staging.selab.edu.vn";
 const PortfolioForm: FC = () => {
 
   const { register, control, handleSubmit, setValue } = useForm<MyFormData>({

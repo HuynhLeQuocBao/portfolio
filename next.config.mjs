@@ -10,7 +10,7 @@ const nextConfig = {
       },
       
     ],
-    domains: ['68.183.186.10'], // Add your hostname here
+    domains: ['68.183.186.10', 'ldnam-staging.selab.edu.vn'], // Add your hostname here
   },
 };
 

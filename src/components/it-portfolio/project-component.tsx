@@ -29,7 +29,7 @@ const ProjectComponent = ({projectName, technologies, demoLink, image}: {project
   return (
     <div data-aos="flip-up" className="flex flex-col h-full p-5 rounded-lg shadow shadow-orange-500 relative bg-white">
       <ProjectImage
-        src={"http://68.183.186.10:3005" + image}
+        src={"https://ldnam-staging.selab.edu.vn" + image}
         alt="Not Found"
       />
       <ProjectTitle title={technologies} />

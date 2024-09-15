@@ -12,7 +12,7 @@ import { MyFormData } from "@/interfaces";
 import Header from "@/components/it-portfolio/header";
 import Footer from "@/components/it-portfolio/footer";
 
-const API_URL = "http://68.183.186.10:3005";
+const API_URL = "https://ldnam-staging.selab.edu.vn";
 const PortfolioPage = () => {
   const params = useParams()
   const router = useRouter()
@@ -28,7 +28,7 @@ const PortfolioPage = () => {
       console.log(res)
     } catch (error) {
       console.log(error)
-      router.replace("/software-engineer")
+      //router.replace("/software-engineer")
     }
   }
   return (
