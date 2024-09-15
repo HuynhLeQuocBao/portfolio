@@ -137,7 +137,7 @@ const ImageSection = ({
       width={500}
       height={500}
       className="h-auto rounded-xl"
-      loading="eager"
+      loading="lazy"
     />
     <div className="flex justify-center gap-x-5 w-full mt-4">
       <ContactInfo contact={contact} />

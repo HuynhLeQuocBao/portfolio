@@ -20,5 +20,26 @@ export const getSkillImage = (name:string)=>{
     if (name === "NodeJs") {
       return "/assets/tools/NodeJs.png";
     }
+    if (name === "PHP") {
+      return "/assets/tools/PHP.png";
+    }
+    if (name === "Laravel") {
+      return "/assets/tools/laravel.png";
+    }
+    if (name === "HubSpot") {
+      return "/assets/tools/HubSpot.png";
+    }
+    if (name === "Angular") {
+      return "/assets/tools/angular.png";
+    }
+    if (name === "TaildwindCSS") {
+      return "/assets/tools/taildwind.png";
+    }
+    if (name === "Bootstrap") {
+      return "/assets/tools/bootstrap.png";
+    }
+    if (name === "Wordpress") {
+      return "/assets/tools/wordpress.png";
+    }
     return "https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/96svfqy1wl8-1210%3A2793?alt=media&token=81d1c085-d19a-4ece-a14f-af90c485d8c3"
   }
