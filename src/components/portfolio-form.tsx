@@ -1,6 +1,6 @@
 "use client";
 import { useForm, useFieldArray } from "react-hook-form";
-import { FC, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { MyFormData } from "../interfaces";
 import * as FormDataUpload from 'form-data'
 import axios from 'axios'; // Import axios for HTTP requests
@@ -76,6 +76,22 @@ const PortfolioForm: FC = () => {
     name: "awardsCertificates",
   });
 
+  const [userInfo, setUserInfo] = useState<MyFormData>()
+  useEffect(()=>{
+    getData(params.user)
+  },[])
+  const getData = async(userInfoId: string| string[])=>{
+    try {
+
+      const res =  await axios.get(API_URL+"/api/get-user?user="+userInfoId)
+      setUserInfo(res.data)
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+      //router.replace("/software-engineer")
+    }
+  }
+
   const router = useRouter();
 
   const handleRoute = (portfolioId: string) => {
@@ -87,6 +103,7 @@ const PortfolioForm: FC = () => {
       console.log(data);
       await axios.post(API_URL+"/api/submit", data).then((res) => {
         console.log(res);
+        localStorage.setItem("portfolioId", data.portfolioId);
         handleRoute(data.portfolioId);
       });
 

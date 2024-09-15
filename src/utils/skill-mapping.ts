@@ -27,7 +27,7 @@ export const getSkillImage = (name:string)=>{
       return "/assets/tools/laravel.png";
     }
     if (name === "HubSpot") {
-      return "/assets/tools/HubSpot.png";
+      return "/assets/tools/Hubspot.png";
     }
     if (name === "Angular") {
       return "/assets/tools/angular.png";
