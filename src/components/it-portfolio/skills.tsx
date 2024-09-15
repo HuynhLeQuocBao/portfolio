@@ -14,15 +14,15 @@ const SectionTitle = ({
   description: string;
 }) => (
   <div className="flex flex-col items-center w-full pb-10">
-    <p data-aos="fade-down" className="text-5xl text-6xl font-semibold font-poppins text-center">{title}</p>
-    <p data-aos="fade-up" className="text-lg font-normal font-poppins text-center tracking-wide mt-4">
+    <p data-aos="fade-up" className="text-5xl xl:text-6xl font-semibold font-poppins text-center">{title}</p>
+    <p data-aos="fade-down" className="text-lg font-normal font-poppins text-center tracking-wide mt-4">
       {description}
     </p>
   </div>
 );
 
 const SkillList = ({ skills }: { skills: TechnicalSkill[]|undefined }) => (
-  <div className="grid grid-cols-1 place-items-center gap-10 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 w-full">
+  <div className="w-full flex justify-center gap-5 flex-wrap">
     {skills?.map((item, index) => (
       <SkillComponent key={index} title={item.title} description={item.description}/>
     ))}
@@ -32,8 +32,6 @@ const SkillList = ({ skills }: { skills: TechnicalSkill[]|undefined }) => (
 const Skills = ({technicalSkills} : {technicalSkills: TechnicalSkill[]|undefined}) => {
 
   const title = "Skills";
-  const description =
-    "Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa nibh lectus netus in. Aliquet donec morbi convallis pretium";
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -42,9 +40,9 @@ const Skills = ({technicalSkills} : {technicalSkills: TechnicalSkill[]|undefined
   return (
     <div
       id="skills"
-      className="flex flex-col justify-start items-start p-4 md:p-10 xl:p-20 w-full h-auto bg-gray-100"
+      className="flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-white"
     >
-      <SectionTitle title={title} description={description} />
+      <SectionTitle title={title} description={''} />
       <SkillList skills={technicalSkills} />
     </div>
   );

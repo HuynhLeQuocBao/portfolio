@@ -1,5 +1,5 @@
 import { FieldArrayWithId, UseFormRegister, FieldValues, UseFieldArrayAppend } from 'react-hook-form';
-import { Education as EducationType } from  '../../interfaces/index';
+import { IEducation as EducationType } from  '../../interfaces/index';
 
 interface EducationProps {
   register: UseFormRegister<FieldValues>;

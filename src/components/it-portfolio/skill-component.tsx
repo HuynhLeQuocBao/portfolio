@@ -28,8 +28,8 @@ const SkillComponent = ({title, description}:{title: string, description: string
 
   return (
     <div
-      data-aos="flip-left"
-      className="flex flex-col h-full p-8 min-w-[20em] rounded-lg box-border max-w-xs bg-white border border-gray-500"
+      data-aos="flip-right"
+      className="flex flex-col h-auto p-8 min-w-[20em] rounded-lg box-border max-w-xs bg-white border border-gray-500"
     >
       <SkillImage
         src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/96svfqy1wl8-1210%3A2793?alt=media&token=81d1c085-d19a-4ece-a14f-af90c485d8c3"

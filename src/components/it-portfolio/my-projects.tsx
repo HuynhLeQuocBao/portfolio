@@ -14,15 +14,15 @@ const SectionTitle = ({
   description: string;
 }) => (
   <div className="flex flex-col items-center w-full pb-10">
-    <p data-aos="fade-down" className="text-5xl md:text-6xl font-semibold font-poppins text-center">{title}</p>
-    <p data-aos="fade-up" className="text-lg font-normal font-poppins text-center tracking-wide mt-4">
+    <p data-aos="fade-up" className="text-5xl md:text-6xl font-semibold font-poppins text-center">{title}</p>
+    <p data-aos="fade-down" className="text-lg font-normal font-poppins text-center tracking-wide mt-4">
       {description}
     </p>
   </div>
 );
 
 const ProjectList = ({ projects }: { projects: Project[]|undefined }) => (
-  <div className="grid grid-cols-1 place-items-center gap-10 lg:grid-cols-2 xl:grid-cols-3 w-full">
+  <div className="w-full flex items-end justify-center gap-5 flex-wrap ">
     {projects?.map((item, index) => (
       <ProjectComponent key={index} projectName={item.projectName} technologies={item.technologies} demoLink={item.demoLink} image={item.image} />
     ))}
@@ -31,8 +31,6 @@ const ProjectList = ({ projects }: { projects: Project[]|undefined }) => (
 
 const Projects = ({projects}:{projects: Project[]|undefined}) => {
   const title = "My Projects";
-  const description =
-    "Lorem ipsum dolor sit amet consectetur. Tristique amet sed massa nibh lectus netus in. Aliquet donec morbi convallis pretium";
 
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -41,7 +39,7 @@ const Projects = ({projects}:{projects: Project[]|undefined}) => {
   return (
     <div
       id="projects"
-      className="flex flex-col justify-start items-start p-4 md:p-10 xl:p-20 w-full h-auto bg-white"
+      className="flex flex-col justify-start items-start px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-orange-50"
     >
       <SectionTitle title={title} description={""} />
       <ProjectList projects={projects} />
