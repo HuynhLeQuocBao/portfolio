@@ -6,7 +6,7 @@ import "aos/dist/aos.css";
 import Image from 'next/image';
 import { getSkillImage } from "../../utils/skill-mapping";
 const SkillImage = ({ src, alt }: { src: string; alt: string }) => (
-  <Image src={src} alt={alt} width={72} height={72}  className="w-[72px] h-[72px]" />
+  <img src={src} alt={alt} width={72} height={72}  className="w-[72px] h-[72px]" />
 );
 
 const SkillTitle = ({ title }: { title: string }) => (

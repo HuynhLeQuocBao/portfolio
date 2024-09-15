@@ -39,7 +39,7 @@ const MyWorkExperience = ({
               key={index}
             >
               <div className="flex items-center justify-between">
-                <p className="flex items-center justify-start text-xl xl:text-4xl mr-2 font-bold leading-none text-orange-500">
+                <p className="flex items-center justify-start text-xl xl:text-4xl mr-5 font-bold leading-none text-orange-500">
                   <img
                     src="/assets/images/company-logo.jpg"
                     className="w-10 h-10 object-cover mr-5"
