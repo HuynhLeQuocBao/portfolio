@@ -28,8 +28,8 @@ const SkillComponent = ({title, description}:{title: string, description: string
 
   return (
     <div
-      data-aos="flip-left"
-      className="flex flex-col h-full p-8 min-w-[20em] rounded-lg box-border max-w-xs bg-white border border-gray-500"
+      data-aos="flip-right"
+      className="flex flex-col h-auto p-8 min-w-[20em] rounded-lg box-border max-w-xs bg-white border border-gray-500"
     >
       <SkillImage
         src={getSkillImage(title)}

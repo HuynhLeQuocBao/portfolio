@@ -1,0 +1,56 @@
+{
+  "profile": {
+    "name": "",
+    "image": "",
+    "bio": ""
+  },
+  "technicalSkills": [
+    {
+      "title": "",
+      "description": ""
+    }
+  ],
+  "education": [
+    {
+      "schoolName": "",
+      "degree": "",
+      "major": ""
+    }
+  ],
+  "workExperience": [
+    {
+      "companyName": "",
+      "position": "",
+      "duration": "",
+      "description": ""
+    }
+  ],
+  "projects": [
+    {
+      "projectName": "",
+      "technologies": "",
+      "demoLink": "",
+      "image": ""
+    }
+  ],
+  "awardsCertificates": [
+    {
+      "name": "",
+      "issuedBy": "",
+      "year": ""
+    }
+  ],
+  "publicationsTalks": [
+    {
+      "title": "",
+      "link": ""
+    }
+  ],
+  "contact": {
+    "email": "",
+    "phone": "",
+    "linkedin": "",
+    "github": ""
+  },
+  "portfolioId": ""
+}

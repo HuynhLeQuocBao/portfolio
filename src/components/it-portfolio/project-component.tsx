@@ -27,13 +27,14 @@ const ProjectComponent = ({projectName, technologies, demoLink, image}: {project
   }, []);
 
   return (
-    <div data-aos="flip-up" className="flex flex-col h-full p-5 rounded-lg shadow shadow-slate-500">
+    <div data-aos="flip-up" className="flex flex-col h-full p-5 rounded-lg shadow shadow-orange-500 relative bg-white">
       <ProjectImage
         src={"http://68.183.186.10:3005" + image}
         alt="Not Found"
       />
       <ProjectTitle title={technologies} />
       <ProjectDescription description={projectName} />
+      <a className="absolute bottom-5 right-5 py-3 px-5 bg-orange-400 text-white rounded-lg hover:bg-orange-600" href={demoLink} target="_blank">Visit</a>
     </div>
   );
 };

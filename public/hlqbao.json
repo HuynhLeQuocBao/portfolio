@@ -1,0 +1,82 @@
+{
+  "profile": {
+    "name": "Bao Huynh",
+    "image": "/uploads/z2422418331635_fd462afe0f4ab955b4aaa7854b72a916.jpg",
+    "bio": "As a passionate software engineer with 3 years of experience, I specialize in building scalable, efficient, and user-friendly web applications. My expertise spans front-end and back-end development, with a deep understanding of languages such as JavaScript, PHP, and frameworks like React, Node.js, and Laravel. I’m driven by a love for solving complex problems and a commitment to writing clean, maintainable code. With a background in agile development, I thrive in collaborative environments and continually seek opportunities to learn new technologies and improve my craft."
+  },
+  "technicalSkills": [
+    {
+      "title": "HTML, CSS",
+      "description": "Website development basic."
+    },
+    {
+      "title": "Javascript, JQuery, ReactJS, NextJS, Angular",
+      "description": "Front end website development."
+    },
+    {
+      "title": "PHP, Laravel, WordPress, WinterCMS, HubSpot CMS",
+      "description": "Back end website development."
+    }
+  ],
+  "education": [
+    {
+      "schoolName": "Saigon University",
+      "degree": "Engineer",
+      "major": "Information Technology"
+    }
+  ],
+  "workExperience": [
+    {
+      "companyName": "Pix",
+      "position": "Intern",
+      "duration": "3 months",
+      "description": ""
+    },
+    {
+      "companyName": "ITC Group",
+      "position": "Software Engineer",
+      "duration": "2 years",
+      "description": ""
+    }
+  ],
+  "projects": [
+    {
+      "projectName": "Joblogic",
+      "technologies": "Hubspot",
+      "demoLink": "https://www.joblogic.com/",
+      "image": "/uploads/Untitled.png"
+    },
+    {
+      "projectName": "ezFeedback",
+      "technologies": ".NET, Angular",
+      "demoLink": "https://ezfeedback.io/",
+      "image": "/uploads/Untitled1.png"
+    },
+    {
+      "projectName": "Updiagram",
+      "technologies": "NestJS, Angular",
+      "demoLink": "https://www.updiagram.com/",
+      "image": "/uploads/Untitled3.png"
+    }
+  ],
+  "awardsCertificates": [
+    {
+      "name": "",
+      "issuedBy": "",
+      "year": ""
+    }
+  ],
+  "publicationsTalks": [
+    {
+      "title": "",
+      "link": ""
+    }
+  ],
+  "contact": {
+    "email": "huynhlequocbao2001@gmail.com",
+    "phone": "0937192146",
+    "linkedin": "https://www.linkedin.com/in/hlqb2001/",
+    "github": "https://github.com/HuynhLeQuocBao"
+  },
+  "portfolioId": "hlqbao"
+}

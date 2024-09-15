@@ -7,7 +7,7 @@ import axios from 'axios'; // Import axios for HTTP requests
 import { useRouter } from "next/navigation";
 const API_URL = "http://68.183.186.10:3005";
 const PortfolioForm: FC = () => {
-  const router = useRouter();
+
   const { register, control, handleSubmit, setValue } = useForm<MyFormData>({
     defaultValues: {
       profile: {
@@ -35,52 +35,82 @@ const PortfolioForm: FC = () => {
     },
   });
 
-  const { fields: educationFields, append: appendEducation, remove: removeEducation } = useFieldArray({
+  const {
+    fields: educationFields,
+    append: appendEducation,
+    remove: removeEducation,
+  } = useFieldArray({
     control,
     name: "education",
   });
-  const { fields: technicalSkillsFields, append: appendSkill, remove: removeSkill } = useFieldArray({
+  const {
+    fields: technicalSkillsFields,
+    append: appendSkill,
+    remove: removeSkill,
+  } = useFieldArray({
     control,
-    name: "technicalSkills"
+    name: "technicalSkills",
   });
-  const { fields: workExperienceFields, append: appendWorkExperience, remove: removeWorkExperience } = useFieldArray({
+  const {
+    fields: workExperienceFields,
+    append: appendWorkExperience,
+    remove: removeWorkExperience,
+  } = useFieldArray({
     control,
-    name: "workExperience"
+    name: "workExperience",
   });
-  const { fields: projectFields, append: appendProject, remove: removeProject } = useFieldArray({
+  const {
+    fields: projectFields,
+    append: appendProject,
+    remove: removeProject,
+  } = useFieldArray({
     control,
-    name: "projects"
+    name: "projects",
   });
-  const { fields: certificateFields, append: appendCertificate,  remove: removeCertificate } = useFieldArray({
+  const {
+    fields: certificateFields,
+    append: appendCertificate,
+    remove: removeCertificate,
+  } = useFieldArray({
     control,
-    name: "awardsCertificates"
+    name: "awardsCertificates",
   });
+
+  const router = useRouter();
+
+  const handleRoute = (portfolioId: string) => {
+    router.push(`/software-engineer/${portfolioId}`);
+  };
+
   const onSubmit = async (data: MyFormData) => {
     try {
-      console.log(data)
-      await axios.post(API_URL+'/api/submit', data);
-     // alert('Data saved successfully');
-     router.push('/software-engineer/' + data.portfolioId);
+      console.log(data);
+      await axios.post(API_URL+"/api/submit", data).then((res) => {
+        console.log(res);
+        handleRoute(data.portfolioId);
+      });
+
+      // alert('Data saved successfully');
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error("Error submitting form:", error);
       //alert('Failed to save data');
     }
   };
   const fileInput = useRef<HTMLInputElement>(null);
   const uploadFile = async (
-    file: File|null, callback: (url: string)=> void
-  )=> {
-    if  (file === null)
-      return;
-    console.log(file)
+    file: File | null,
+    callback: (url: string) => void
+  ) => {
+    if (file === null) return;
+    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
 
     const response = await axios.post(API_URL+"/api/upload", formData);
 
     console.log(response);
-    callback(response.data.url)
-  }
+    callback(response.data.url);
+  };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -96,110 +126,107 @@ const PortfolioForm: FC = () => {
 
       <Projects register={register} appendProject={appendProject} projectFields={projectFields} />
       <Certificates register={register} appendCertificate={appendCertificate} certificateFields={certificateFields} /> */}
-       <div>
-                <label className="block">
-                    <span className="text-gray-700">Portfolio ID</span>
-                    <input
-                        type="text"
-                        placeholder="Example: ldnam, hlqbao, mhphuc, dkhuyen,..."
-                        {...register("portfolioId")}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                    />
-                </label>
-            <h2 className="text-2xl font-bold">Profile</h2>
-            <div className="space-y-2">
-                <label className="block">
-                    <span className="text-gray-700">Name</span>
-                    <input
-                        type="text"
-                        {...register("profile.name")}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                    />
-                </label>
-                <label className="block">
-                    <span className="text-gray-700">Image URL</span>
-                    <input
-                    
-                        type="file"
-                        onChange ={  (e) => {
-                          if (e !== null && e.target !== null &&e.target.files !== null && e.target.files?.length > 0){
-                            uploadFile(e.target.files[0], (url)=>{
-                              console.log(url)
-                              setValue("profile.image", url)
-                            })
-                          }
-                          
-                        }}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                    />
-                    <input
-                    
-                        type="hidden"
-                        {...register("profile.image")}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                    />
-                </label>
-                <label className="block">
-                    <span className="text-gray-700">Bio</span>
-                    <textarea
-                        {...register("profile.bio")}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none h-32"
-                    />
-                </label>
-                
-            </div>
+      <div>
+        <label className="block">
+          <span className="text-2xl font-bold">Portfolio ID</span>
+          <input
+            type="text"
+            placeholder="Example: ldnam, hlqbao, mhphuc, dkhuyen,..."
+            {...register("portfolioId")}
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+          />
+        </label>
+        <h2 className="text-2xl font-bold">Profile</h2>
+        <div className="space-y-2">
+          <label className="block">
+            <span className="text-gray-700">Name</span>
+            <input
+              type="text"
+              {...register("profile.name")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Image URL</span>
+            <input
+              type="file"
+              onChange={(e) => {
+                if (
+                  e !== null &&
+                  e.target !== null &&
+                  e.target.files !== null &&
+                  e.target.files?.length > 0
+                ) {
+                  uploadFile(e.target.files[0], (url) => {
+                    console.log(url);
+                    setValue("profile.image", url);
+                  });
+                }
+              }}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+            />
+            <input
+              type="hidden"
+              {...register("profile.image")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+            />
+          </label>
+          <label className="block">
+            <span className="text-gray-700">Bio</span>
+            <textarea
+              {...register("profile.bio")}
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none h-32"
+            />
+          </label>
         </div>
-        <div>
-            {/* Technical Skills */}
-            <h2 className="text-2xl font-bold">Technical Skills</h2>
-            <div className="space-y-2">
-                {technicalSkillsFields.map((item, index) => (
-                    <div
-                        key={item.id}
-                        className="space-y-2 border p-4 rounded-md shadow-sm"
-                    >
-                        <label className="block">
-                            <span className="text-gray-700">Framework/Tool/Language</span>
-                            <input
-                                type="text"
-                                {...register(`technicalSkills.${index}.title`)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                            />
-                            
-                        </label>
-                        <label className="block">
-                            <span className="text-gray-700">Description</span>
-                            <input
-                                type="text"
-                                {...register(`technicalSkills.${index}.description`)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                            />
-                        </label>
-                         {/* Remove button */}
-                        <button
-                          type="button"
-                          onClick={() => removeSkill(index)} // Call removeSkill to remove the item at index
-                          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Remove
-                        </button>
-                    </div>
-                )
-                )}
-                <button
-                    type="button"
-                    onClick={() =>
-                        appendSkill({ title: "", description: "" })
-                    }
-                    className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
-                >
-                    Add Skill
-                </button>
+      </div>
+      <div>
+        {/* Technical Skills */}
+        <h2 className="text-2xl font-bold mt-5">Technical Skills</h2>
+        <div className="space-y-2">
+          {technicalSkillsFields.map((item, index) => (
+            <div
+              key={item.id}
+              className="space-y-2 border p-4 rounded-md shadow-sm"
+            >
+              <label className="block">
+                <span className="text-gray-700">Framework/Tool/Language</span>
+                <input
+                  type="text"
+                  {...register(`technicalSkills.${index}.title`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Description</span>
+                <input
+                  type="text"
+                  {...register(`technicalSkills.${index}.description`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              {/* Remove button */}
+              <button
+                type="button"
+                onClick={() => removeSkill(index)} // Call removeSkill to remove the item at index
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Remove
+              </button>
             </div>
+          ))}
+          <button
+            type="button"
+            onClick={() => appendSkill({ title: "", description: "" })}
+            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+          >
+            Add Skill
+          </button>
         </div>
-        <div>
+      </div>
+      <div>
         {/* Certificates */}
-        <h2 className="text-2xl font-bold">Certificates</h2>
+        <h2 className="text-2xl font-bold mt-5">Certificates</h2>
         <div className="space-y-4 mt-10">
           {certificateFields.map((item, index) => (
             <div
@@ -232,12 +259,12 @@ const PortfolioForm: FC = () => {
               </label>
               {/* Remove button */}
               <button
-                          type="button"
-                          onClick={() => removeCertificate(index)} // Call removeSkill to remove the item at index
-                          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Remove
-                        </button>
+                type="button"
+                onClick={() => removeCertificate(index)} // Call removeSkill to remove the item at index
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Remove
+              </button>
             </div>
           ))}
           <button
@@ -251,124 +278,129 @@ const PortfolioForm: FC = () => {
           </button>
         </div>
       </div>
-        <div>
-            {/* Education */}
-            <h2 className="text-2xl font-bold">Education</h2>
-            <div className="space-y-4 mt-10 ">
-                {educationFields.map((item, index) => (
-                    <div
-                        key={item.id}
-                        className="space-y-2 border p-4 rounded-md shadow-sm"
-                    >
-                        <label className="block">
-                            <span className="text-gray-700">School Name</span>
-                            <input
-                                type="text"
-                                {...register(`education.${index}.schoolName`)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                            />
-                        </label>
-                        <label className="block">
-                            <span className="text-gray-700">Degree</span>
-                            <input
-                                type="text"
-                                {...register(`education.${index}.degree`)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                            />
-                        </label>
-                        <label className="block">
-                            <span className="text-gray-700">Major</span>
-                            <input
-                                type="text"
-                                {...register(`education.${index}.major`)}
-                                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                            />
-                        </label>
-                         {/* Remove button */}
-                         <button
-                          type="button"
-                          onClick={() => removeEducation(index)} // Call removeSkill to remove the item at index
-                          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                        >
-                          Remove
-                        </button>
-                    </div>
-                ))}
-                <button
-                    type="button"
-                    onClick={() =>
-                        appendEducation({ schoolName: "", degree: "", major: "" })
-                    }
-                    className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
-                >
-                    Add Education
-                </button>
-            </div>
-        </div>
-        <div>
-        <div>
-        {/* Work Experience */}
-        <h2 className="text-2xl font-bold">Work Experience</h2>
-        <div className="space-y-4 mt-10">
-          {workExperienceFields.map((item, index) => (
+      <div>
+        {/* Education */}
+        <h2 className="text-2xl font-bold mt-5">Education</h2>
+        <div className="space-y-4 mt-10 ">
+          {educationFields.map((item, index) => (
             <div
               key={item.id}
               className="space-y-2 border p-4 rounded-md shadow-sm"
             >
               <label className="block">
-                <span className="text-gray-700">Company Name</span>
+                <span className="text-gray-700">School Name</span>
                 <input
                   type="text"
-                  {...register(`workExperience.${index}.companyName`)}
+                  {...register(`education.${index}.schoolName`)}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Position</span>
+                <span className="text-gray-700">Degree</span>
                 <input
                   type="text"
-                  {...register(`workExperience.${index}.position`)}
+                  {...register(`education.${index}.degree`)}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Duration</span>
+                <span className="text-gray-700">Major</span>
                 <input
                   type="text"
-                  {...register(`workExperience.${index}.duration`)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                />
-              </label>
-              <label className="block">
-                <span className="text-gray-700">Description</span>
-                <textarea
-                  {...register(`workExperience.${index}.description`)}
+                  {...register(`education.${index}.major`)}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
               {/* Remove button */}
               <button
-                    type="button"
-                    onClick={() => removeProject(index)} // Call removeSkill to remove the item at index
-                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                  >
-                    Remove
-                  </button>
+                type="button"
+                onClick={() => removeEducation(index)} // Call removeSkill to remove the item at index
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Remove
+              </button>
             </div>
           ))}
           <button
             type="button"
             onClick={() =>
-              appendWorkExperience({ companyName: "", position: "", duration: "", description: "" })
+              appendEducation({ schoolName: "", degree: "", major: "" })
             }
             className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
           >
-            Add Work Experience
+            Add Education
           </button>
         </div>
       </div>
+      <div>
+        <div>
+          {/* Work Experience */}
+          <h2 className="text-2xl font-bold mt-5">Work Experience</h2>
+          <div className="space-y-4 mt-10">
+            {workExperienceFields.map((item, index) => (
+              <div
+                key={item.id}
+                className="space-y-2 border p-4 rounded-md shadow-sm"
+              >
+                <label className="block">
+                  <span className="text-gray-700">Company Name</span>
+                  <input
+                    type="text"
+                    {...register(`workExperience.${index}.companyName`)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700">Position</span>
+                  <input
+                    type="text"
+                    {...register(`workExperience.${index}.position`)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700">Duration</span>
+                  <input
+                    type="text"
+                    {...register(`workExperience.${index}.duration`)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-gray-700">Description</span>
+                  <textarea
+                    {...register(`workExperience.${index}.description`)}
+                    className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                  />
+                </label>
+                {/* Remove button */}
+                <button
+                  type="button"
+                  onClick={() => removeProject(index)} // Call removeSkill to remove the item at index
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+                >
+                  Remove
+                </button>
+              </div>
+            ))}
+            <button
+              type="button"
+              onClick={() =>
+                appendWorkExperience({
+                  companyName: "",
+                  position: "",
+                  duration: "",
+                  description: "",
+                })
+              }
+              className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
+            >
+              Add Work Experience
+            </button>
+          </div>
+        </div>
         {/* Projects */}
-        <h2 className="text-2xl font-bold">Projects</h2>
+        <h2 className="text-2xl font-bold mt-5">Projects</h2>
         <div className="space-y-4 mt-10">
           {projectFields.map((item, index) => (
             <div
@@ -383,7 +415,7 @@ const PortfolioForm: FC = () => {
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
-             
+
               <label className="block">
                 <span className="text-gray-700">Technologies</span>
                 <input
@@ -400,44 +432,51 @@ const PortfolioForm: FC = () => {
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
-              
+
               <label className="block">
-                    <span className="text-gray-700">Picture</span>
-                    <input
-                    
-                        type="file"
-                        onChange ={  (e) => {
-                          if (e !== null && e.target !== null &&e.target.files !== null && e.target.files?.length > 0){
-                            uploadFile(e.target.files[0], (url)=>{
-                              console.log(url)
-                              setValue(`projects.${index}.image`, url)
-                            })
-                          }
-                          
-                        }}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                    />
-                    <input
-                    
-                        type="hidden"
-                        {...register(`projects.${index}.image`)}
-                        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                    />
-                </label>
-                {/* Remove button */}
-                <button
-                    type="button"
-                    onClick={() => removeProject(index)} // Call removeSkill to remove the item at index
-                    className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-                  >
-                    Remove
-                  </button>
+                <span className="text-gray-700">Picture</span>
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    if (
+                      e !== null &&
+                      e.target !== null &&
+                      e.target.files !== null &&
+                      e.target.files?.length > 0
+                    ) {
+                      uploadFile(e.target.files[0], (url) => {
+                        console.log(url);
+                        setValue(`projects.${index}.image`, url);
+                      });
+                    }
+                  }}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+                <input
+                  type="hidden"
+                  {...register(`projects.${index}.image`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              {/* Remove button */}
+              <button
+                type="button"
+                onClick={() => removeProject(index)} // Call removeSkill to remove the item at index
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+              >
+                Remove
+              </button>
             </div>
           ))}
           <button
             type="button"
             onClick={() =>
-              appendProject({ projectName: "", technologies: "", demoLink: "", image: "" })
+              appendProject({
+                projectName: "",
+                technologies: "",
+                demoLink: "",
+                image: "",
+              })
             }
             className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
           >
@@ -446,7 +485,7 @@ const PortfolioForm: FC = () => {
         </div>
       </div>
       {/* Contact */}
-      <h2 className="text-2xl font-bold">Contact</h2>
+      <h2 className="text-2xl font-bold mt-5">Contact</h2>
       <div className="space-y-2">
         <label className="block">
           <span className="text-gray-700">Email</span>

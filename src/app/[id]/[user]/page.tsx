@@ -1,14 +1,16 @@
 "use client";
-import Header from "@/components/it-portfolio/header";
 import React, { useEffect, useState } from "react";
 import AboutMe from "@/components/it-portfolio/about-me";
 import Skills from "@/components/it-portfolio/skills";
+import Education from "@/components/it-portfolio/education";
+// import WorkExperience from "@/components/it-portfolio/work-experience";
 import MyProjects from "@/components/it-portfolio/my-projects";
-import Footer from "@/components/it-portfolio/footer";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 import "../../../styles/it-portfolio.css";
 import { MyFormData } from "@/interfaces";
+import Header from "@/components/it-portfolio/header";
+import Footer from "@/components/it-portfolio/footer";
 
 const API_URL = "http://68.183.186.10:3005";
 const PortfolioPage = () => {
@@ -31,11 +33,13 @@ const PortfolioPage = () => {
   }
   return (
     <div className="w-full">
-      <Header />
-      <AboutMe name={userInfo?.profile?.name} bio={userInfo?.profile?.bio} image={userInfo? "http://68.183.186.10:3005" + userInfo.profile?.image : ""}/>
+      <Header/>
+      <AboutMe name={userInfo?.profile?.name} bio={userInfo?.profile?.bio} image={userInfo? "http://68.183.186.10:3005" + userInfo.profile?.image : ""} contact={userInfo?.contact}/>
+      <Education education ={userInfo?.education} />
       <Skills  technicalSkills = {userInfo?.technicalSkills}/>
+      {/* <WorkExperience projects ={userInfo?.workExperience} /> */}
       <MyProjects projects ={userInfo?.projects} />
-      <Footer />
+      <Footer/>
     </div>
   );
 };

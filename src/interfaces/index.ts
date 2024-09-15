@@ -19,7 +19,7 @@ export interface TechnicalSkill {
   title: string;
 }
 
-export interface Education {
+export interface IEducation {
   schoolName: string;
   degree: string;
   major: string;
@@ -61,7 +61,7 @@ export interface MyFormData {
   portfolioId: string;
   profile: Profile;
   technicalSkills: TechnicalSkill[];
-  education: Education[];
+  education: IEducation[];
   workExperience: WorkExperience[];
   projects: Project[];
   awardsCertificates: AwardCertificate[];
