@@ -17,7 +17,7 @@ const PortfolioForm: FC = () => {
       },
       technicalSkills: [{ title: "", description: "" }],
 
-      education: [{ schoolName: "", degree: "", major: "" }],
+      education: [{ schoolName: "", degree: "", duration: "", description: "" }],
       workExperience: [
         { companyName: "", position: "", duration: "", description: "" },
       ],
@@ -224,60 +224,7 @@ const PortfolioForm: FC = () => {
           </button>
         </div>
       </div>
-      <div>
-        {/* Certificates */}
-        <h2 className="text-2xl font-bold mt-5">Certificates</h2>
-        <div className="space-y-4 mt-10">
-          {certificateFields.map((item, index) => (
-            <div
-              key={item.id}
-              className="space-y-2 border p-4 rounded-md shadow-sm"
-            >
-              <label className="block">
-                <span className="text-gray-700">Certificate Name</span>
-                <input
-                  type="text"
-                  {...register(`awardsCertificates.${index}.name`)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                />
-              </label>
-              <label className="block">
-                <span className="text-gray-700">Issued By</span>
-                <input
-                  type="text"
-                  {...register(`awardsCertificates.${index}.issuedBy`)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                />
-              </label>
-              <label className="block">
-                <span className="text-gray-700">Year</span>
-                <input
-                  type="text"
-                  {...register(`awardsCertificates.${index}.year`)}
-                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
-                />
-              </label>
-              {/* Remove button */}
-              <button
-                type="button"
-                onClick={() => removeCertificate(index)} // Call removeSkill to remove the item at index
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-          <button
-            type="button"
-            onClick={() =>
-              appendCertificate({ name: "", issuedBy: "", year: "" })
-            }
-            className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
-          >
-            Add Certificate
-          </button>
-        </div>
-      </div>
+
       <div>
         {/* Education */}
         <h2 className="text-2xl font-bold mt-5">Education</h2>
@@ -304,10 +251,18 @@ const PortfolioForm: FC = () => {
                 />
               </label>
               <label className="block">
-                <span className="text-gray-700">Major</span>
+                <span className="text-gray-700">Duration</span>
                 <input
                   type="text"
-                  {...register(`education.${index}.major`)}
+                  {...register(`education.${index}.duration`)}
+                  className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
+                />
+              </label>
+              <label className="block">
+                <span className="text-gray-700">Description</span>
+                <input
+                  type="text"
+                  {...register(`education.${index}.description`)}
                   className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm px-4 py-2 outline-none"
                 />
               </label>
@@ -324,7 +279,7 @@ const PortfolioForm: FC = () => {
           <button
             type="button"
             onClick={() =>
-              appendEducation({ schoolName: "", degree: "", major: "" })
+              appendEducation({ schoolName: "", degree: "", duration: "", description: "" })
             }
             className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
           >

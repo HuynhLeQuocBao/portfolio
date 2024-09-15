@@ -22,7 +22,8 @@ export interface TechnicalSkill {
 export interface IEducation {
   schoolName: string;
   degree: string;
-  major: string;
+  duration: string;
+  description: string;
 }
 
 export interface WorkExperience {
