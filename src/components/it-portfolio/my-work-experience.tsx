@@ -19,7 +19,7 @@ const MyWorkExperience = ({
   return (
     <div
       id="education"
-      className="flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-orange-50"
+      className="max-w-[1600px] mx-auto flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-orange-50"
     >
       <div className="flex flex-col items-center w-full pb-10">
         <p
@@ -30,7 +30,7 @@ const MyWorkExperience = ({
         </p>
       </div>
 
-      <div className="flex items-center justify-center gap-10 flex-wrap">
+      <div className="flex items-center justify-center gap-10 flex-wrap xl:flex-nowrap">
         {experience?.map((item, index) => {
           return (
             <div

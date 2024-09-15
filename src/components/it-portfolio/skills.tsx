@@ -40,7 +40,7 @@ const Skills = ({technicalSkills} : {technicalSkills: TechnicalSkill[]|undefined
   return (
     <div
       id="skills"
-      className="flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-white"
+      className="max-w-[1600px] mx-auto flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-white"
     >
       <SectionTitle title={title} description={''} />
       <SkillList skills={technicalSkills} />

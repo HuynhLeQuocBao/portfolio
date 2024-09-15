@@ -47,7 +47,7 @@ const Education: React.FC<EducationProps> = ({ register, appendEducation, educat
                 <button
                     type="button"
                     onClick={() =>
-                        appendEducation({ schoolName: "", degree: "", major: "" })
+                        appendEducation({ schoolName: "", degree: "" })
                     }
                     className="px-4 py-2 bg-indigo-500 text-white rounded-md hover:bg-indigo-600"
                 >

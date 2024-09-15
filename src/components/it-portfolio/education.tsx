@@ -35,7 +35,7 @@ const Education = ({ education }: Props) => {
   return (
     <div
       id="education"
-      className="flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-orange-50"
+      className="max-w-[1600px] mx-auto flex flex-col justify-center items-center px-4 py-10 md:p-10 xl:p-20 w-full h-auto bg-orange-50"
     >
       <div className="flex flex-col items-center w-full pb-10">
         <p
@@ -50,7 +50,6 @@ const Education = ({ education }: Props) => {
         return (
           <div key={index} className="grid grid-cols-1 md:grid-cols-3 gap-5 place-items-center">
             <EducationItem item={item.schoolName} image="/assets/images/university.jpg" />
-            <EducationItem item={item.major} image="/assets/images/major.jpg" />
             <EducationItem item={item.degree + ' Degree'} image="/assets/images/degree.png" />
           </div>
         );

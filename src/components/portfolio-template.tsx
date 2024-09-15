@@ -50,7 +50,7 @@ const PorfolioTemplate: FC = () => {
                 className="w-full h-full object-cover rounded-t-lg"
               />
             </div>
-            <div className="p-5 border-t-2 border-orange-500">
+            <div className="p-5">
               <h2 className="font-bold text-left text-lg md:text-2xl xl:text-3xl text-orange-600">
                 {item.name}
               </h2>
