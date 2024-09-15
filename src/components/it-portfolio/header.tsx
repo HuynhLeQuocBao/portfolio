@@ -3,7 +3,7 @@ import React from "react";
 const HeaderItem = ({ text, link }: { text: string; link: string }) => (
   <a
     href={"#" + link}
-    className="block py-5 header-text text-xl font-poppins hover:text-teal-700 active:text-teal-700"
+    className="block py-5 header-text text-xl font-poppins hover:text-orange-500 active:text-orange-500"
   >
     {text}
   </a>
@@ -12,10 +12,10 @@ const HeaderItem = ({ text, link }: { text: string; link: string }) => (
 const Header = () => {
   const headerItems = [
     { text: "Home", link: "home" },
-    { text: "Skills", link: "skills" },
     { text: "Education", link: "education" },
+    { text: "Skill", link: "skills" },
     { text: "Experience", link: "experience" },
-    { text: "Projects", link: "projects" },
+    { text: "Project", link: "projects" },
   ];
 
   return (
