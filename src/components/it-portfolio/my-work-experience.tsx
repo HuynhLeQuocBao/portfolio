@@ -16,23 +16,6 @@ const MyWorkExperience = ({
     AOS.init({ duration: 1000 });
   }, []);
 
-  const experiences = [
-    {
-      companyName: "Pix Interaction",
-      position: "Intern Developer",
-      duration: "07/2022 - 10/2022",
-      description:
-        "Developing and maintaining web applications using ReactJS and NodeJS.",
-    },
-    {
-      companyName: "ITC Group",
-      position: "Software Engineer",
-      duration: "10/2022 - present",
-      description:
-        "Developing and maintaining web applications using ReactJS and NodeJS.",
-    },
-  ];
-
   return (
     <div
       id="education"
@@ -48,7 +31,7 @@ const MyWorkExperience = ({
       </div>
 
       <div className="flex items-center justify-center gap-10 flex-wrap">
-        {experiences?.map((item, index) => {
+        {experience?.map((item, index) => {
           return (
             <div
               data-aos="flip-up"
