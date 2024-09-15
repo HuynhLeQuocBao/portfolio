@@ -4,7 +4,10 @@ import { FC, useRef } from "react";
 import { MyFormData } from "../interfaces";
 import * as FormDataUpload from 'form-data'
 import axios from 'axios'; // Import axios for HTTP requests
+import { useRouter } from "next/navigation";
+const API_URL = "http://68.183.186.10:3005";
 const PortfolioForm: FC = () => {
+  const router = useRouter();
   const { register, control, handleSubmit, setValue } = useForm<MyFormData>({
     defaultValues: {
       profile: {
@@ -55,8 +58,9 @@ const PortfolioForm: FC = () => {
   const onSubmit = async (data: MyFormData) => {
     try {
       console.log(data)
-      await axios.post('/api/submit', data);
+      await axios.post(API_URL+'/api/submit', data);
      // alert('Data saved successfully');
+     router.push('/software-engineer/' + data.portfolioId);
     } catch (error) {
       console.error('Error submitting form:', error);
       //alert('Failed to save data');
@@ -72,7 +76,7 @@ const PortfolioForm: FC = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await axios.post("/api/upload", formData);
+    const response = await axios.post(API_URL+"/api/upload", formData);
 
     console.log(response);
     callback(response.data.url)

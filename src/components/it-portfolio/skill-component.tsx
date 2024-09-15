@@ -4,9 +4,9 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Image from 'next/image';
-
+import { getSkillImage } from "../../utils/skill-mapping";
 const SkillImage = ({ src, alt }: { src: string; alt: string }) => (
-  <Image src={src} alt={alt} width={72} height={82} className="w-[72px] h-[82px]" />
+  <Image src={src} alt={alt} width={72} height={72}  className="w-[72px] h-[72px]" />
 );
 
 const SkillTitle = ({ title }: { title: string }) => (
@@ -32,7 +32,7 @@ const SkillComponent = ({title, description}:{title: string, description: string
       className="flex flex-col h-full p-8 min-w-[20em] rounded-lg box-border max-w-xs bg-white border border-gray-500"
     >
       <SkillImage
-        src="https://firebasestorage.googleapis.com/v0/b/unify-v3-copy.appspot.com/o/96svfqy1wl8-1210%3A2793?alt=media&token=81d1c085-d19a-4ece-a14f-af90c485d8c3"
+        src={getSkillImage(title)}
         alt="Not Found"
       />
       <SkillTitle title={title} />
