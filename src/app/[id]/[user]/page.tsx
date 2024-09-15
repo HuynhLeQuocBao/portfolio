@@ -34,7 +34,7 @@ const PortfolioPage = () => {
   return (
     <div className="w-full">
       <Header/>
-      <AboutMe name={userInfo?.profile?.name} bio={userInfo?.profile?.bio} image={userInfo? "http://68.183.186.10:3005" + userInfo.profile?.image : ""} contact={userInfo?.contact}/>
+      <AboutMe name={userInfo?.profile?.name} bio={userInfo?.profile?.bio} image={userInfo? "https://ldnam-staging.selab.edu.vn" + userInfo.profile?.image : ""} contact={userInfo?.contact}/>
       <Education education ={userInfo?.education} />
       <Skills  technicalSkills = {userInfo?.technicalSkills}/>
       {/* <WorkExperience projects ={userInfo?.workExperience} /> */}
